@@ -1,0 +1,33 @@
+name: Run Tests
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - dev
+      - candidate
+      - stable
+      - master
+      - main
+
+env:
+  flutter_version: "3.24.3" # TODO: Put on variables
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.flutter_version }}
+          channel: "stable"
+          cache: true
+
+      - name: Install flutter dependencies
+        run: flutter pub get
+
+      - name: Run Tests
+        run: flutter test

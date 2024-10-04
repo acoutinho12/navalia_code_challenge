@@ -1,0 +1,66 @@
+name: Build iOS App
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Flavor"
+        required: true
+        default: "staging"
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
+
+env:
+  flutter_version: "3.24.3" # TODO: Put on variables
+
+jobs:
+  build-and-deploy:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      # - uses: actions/setup-node@v4 #to install firebase CLI
+      #   with:
+      #     node-version: 20
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.flutter_version }}
+          channel: "stable"
+          cache: true # Cache to reduce cost and time up to 50%
+      - run: flutter --version
+
+      - name: Cache Flutter build folder
+        uses: actions/cache@v2
+        with:
+          path: build
+          key: build-cache-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('flutter --version') }} # Cache to reduce cost and time up to 50%
+          restore-keys: |
+            build-cache-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build iOS app
+        run: flutter build ios -t lib/${{ inputs.environment }}_main.dart --flavor ${{ inputs.environment }} --release --no-codesign
+
+      - name: Install Fastlane
+        run: |
+          gem install fastlane
+
+      - name: Sign IPA using Fastlane
+        run: |
+          cd ios
+          fastlane ios sign_ipa
+
+## Send to firebase app distribution or google play store(close test, internal test, production) with fastlane or some action
+# - name: Install Firebase CLI
+#         run: npm install -g firebase-tools
+# firebase appdistribution:distribute build/ios/ipa/navalia_code_challenge.ipa \
+#   --app ??? \
+#   --release-notes-file "notes.txt" \
+#   --groups "???"
