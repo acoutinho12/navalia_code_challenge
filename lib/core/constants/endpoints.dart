@@ -15,7 +15,7 @@ class Endpoint {
   final HttpMethod method;
   Map<String, dynamic>? queryParams;
   final Object? data;
-  final Options? options;
+  Options? options;
   DioForNative? dio;
   Endpoint(
       {required this.path,
