@@ -5,9 +5,9 @@ import 'package:navalia_code_challenge/external/data/shared/datasources/wendys_d
 import 'package:navalia_code_challenge/external/data/shared/models/menu_request_model.dart';
 import 'package:navalia_code_challenge/external/domain/shared/entities/menu_entity.dart';
 
-import '../../../../../helpers/dio_mock.dart';
-import '../../../../../helpers/init_flutter.dart';
-import '../../../../../helpers/mock_data_response.dart';
+import '../../../../helpers/dio_mock.dart';
+import '../../../../helpers/init_flutter.dart';
+import '../../../../helpers/mock_data_response.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

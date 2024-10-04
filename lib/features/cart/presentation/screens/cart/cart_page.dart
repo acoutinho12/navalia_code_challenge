@@ -4,7 +4,7 @@ import 'package:navalia_code_challenge/core/extensions/build_context_extensions.
 import 'package:navalia_code_challenge/core/extensions/extensions.dart';
 import 'package:navalia_code_challenge/core/widgets/cached_image.dart';
 import 'package:navalia_code_challenge/core/widgets/custom_app_bar.dart';
-import 'package:navalia_code_challenge/external/data/cart/domain/entities/shopping_cart_item.dart';
+import 'package:navalia_code_challenge/external/domain/cart/entities/shopping_cart_item.dart';
 import 'package:navalia_code_challenge/features/cart/presentation/cubit/shopping_cart/shopping_cart_cubit.dart';
 import 'package:navalia_code_challenge/features/cart/presentation/cubit/shopping_cart/shopping_cart_state.dart';
 import 'package:navalia_code_challenge/features/cart/presentation/screens/cart/widgets/empty_cart_widget.dart';

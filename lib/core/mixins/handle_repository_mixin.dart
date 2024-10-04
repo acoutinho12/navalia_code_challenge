@@ -1,11 +1,12 @@
+import 'package:dartz/dartz.dart';
 import 'package:navalia_code_challenge/core/constants/failure.dart';
 import 'package:navalia_code_challenge/core/exceptions/exceptions.dart';
-import 'package:dartz/dartz.dart';
 
 mixin HandleRepositoryMixin {
-  Future<Either<Failure, T>> handleData<T>(Future<T> response) async {
+  Future<Either<Failure, T>> handleData<T>(
+      Future<T> Function() response) async {
     try {
-      return Right(await response);
+      return Right(await response.call());
     } on HttpMethodException catch (e) {
       return Left(HttpMethodFailure(e.message));
     } on DioNullException catch (e) {

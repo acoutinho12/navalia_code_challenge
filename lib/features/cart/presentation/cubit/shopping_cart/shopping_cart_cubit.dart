@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:navalia_code_challenge/external/data/cart/domain/entities/shopping_cart_item.dart';
+import 'package:navalia_code_challenge/external/domain/cart/entities/shopping_cart_item.dart';
 import 'package:navalia_code_challenge/external/domain/shared/entities/menu_entity.dart';
 import 'package:navalia_code_challenge/features/cart/presentation/cubit/shopping_cart/shopping_cart_state.dart';
 

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:navalia_code_challenge/external/data/cart/domain/entities/shopping_cart_item.dart';
+import 'package:navalia_code_challenge/external/domain/cart/entities/shopping_cart_item.dart';
 
 enum ShoppingCartStatus { initial, loading, failure, success }
 

@@ -16,7 +16,7 @@ class WendysRepositoryImpl
   @override
   Future<Either<Failure, MenuEntity>> getSiteMenu(
       {required MenuRequestEntity menuRequest}) async {
-    return await handleData<MenuEntity>(wendysDatasource.getSiteMenu(
+    return await handleData<MenuEntity>(() => wendysDatasource.getSiteMenu(
         menuRequest: MenuRequestModel.fromEntity(menuRequest)));
   }
 }
