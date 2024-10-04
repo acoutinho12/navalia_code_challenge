@@ -17,7 +17,8 @@ This is a Flutter application for a code challenge. The app supports multiple en
 
 ## Demo
 
-![App demo](assets\project\videos\app_demo.mp4)
+
+https://github.com/user-attachments/assets/03ccb7ba-bb17-40b5-a603-2b21e458fbad
 
 ## Getting Started
 
