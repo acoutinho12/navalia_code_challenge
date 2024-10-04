@@ -17,7 +17,7 @@ This is a Flutter application for a code challenge. The app supports multiple en
 
 ## Demo
 
-<video src="assets\project\videos\app_demo.mp4" controls></video>
+![App demo](assets\project\videos\app_demo.mp4)
 
 ## Getting Started
 
