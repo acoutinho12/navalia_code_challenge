@@ -1,0 +1,30 @@
+# Fastfile
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Sign IPA using match and App Store Connect API Key"
+  lane :sign_ipa do
+    app_store_connect_api_key = app_store_connect_api_key(
+      key_id: ENV["APP_STORE_CONNECT_KEY_ID"],
+      issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
+      key_content: ENV["APP_STORE_CONNECT_API_KEY"],
+      in_house: false 
+    )
+
+    match(
+      type: "appstore", # "development", "adhoc", or "enterprise"
+      api_key: app_store_connect_api_key
+    )
+
+    # Distribution
+    # ipa_path = "./build/ios/ipa/navalia_code_challenge.ipa"
+
+    # gym(
+    #   output_directory: "./build",
+    #   output_name: "navalia_code_challenge.ipa",
+    #   export_method: "app-store", # "ad-hoc", "enterprise", or "development"
+    #   ipa: ipa_path
+    # )
+  end
+end
