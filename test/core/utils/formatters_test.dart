@@ -33,4 +33,19 @@ void main() {
       expect(Formatters.intOrNegativeOne(null), -1);
     });
   });
+  group('toDoubleOrNegativeOne', () {
+    test('should return 20.0 when value is String', () {
+      const String value = '20';
+      expect(Formatters.toDoubleOrNegativeOne(value), 20.0);
+    });
+
+    test('should return 20.0 when value is num', () {
+      const int value = 20;
+      expect(Formatters.toDoubleOrNegativeOne(value), 20.0);
+    });
+
+    test('should return  when value is null', () {
+      expect(Formatters.toDoubleOrNegativeOne(null), -1);
+    });
+  });
 }
