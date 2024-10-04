@@ -27,7 +27,7 @@ class WendysDatasourceImpl
       ..options = dio.cacheOptions.toOptions().copyWith(
             validateStatus: (status) =>
                 status.orNegativeOne > 0 && status.orNegativeOne < 399,
-          );
+          ); // The /getSiteMenu endpoint supports caching through ETAG and we can implement some type of cache.
     return await handleResponse(
         endpoint, (data) => MenuEntityModel.fromJson(data) as MenuEntity);
   }
