@@ -10,6 +10,7 @@ This is a Flutter application for a code challenge. The app supports multiple en
   - [Getting Started](#getting-started)
   - [Flavors](#flavors)
   - [Building and Running](#building-and-running)
+    - [CI](#ci)
     - [Android](#android)
     - [iOS](#ios)
   - [Cache Strategy for Flutter App using Dio, Hive, and ETAG](#cache-strategy-for-flutter-app-using-dio-hive-and-etag)
@@ -17,8 +18,7 @@ This is a Flutter application for a code challenge. The app supports multiple en
 
 ## Demo
 
-
-https://github.com/user-attachments/assets/03ccb7ba-bb17-40b5-a603-2b21e458fbad
+<https://github.com/user-attachments/assets/03ccb7ba-bb17-40b5-a603-2b21e458fbad>
 
 ## Getting Started
 
@@ -48,6 +48,14 @@ This app supports three flavors:
 Each flavor has its own configuration and entry point.
 
 ## Building and Running
+
+### CI
+
+| Workflow      | File                                                                 | Description |
+| ------------- | ---------------------------------------------------------------------- | ---- |
+| Build Android | [Build Android](.github\workflows\build_android.yml) | Build and deploy Android to Store or App distribution |
+| Build iOS     | [Build iOS](.github\workflows\build_ios.yml)       | Build and deploy iOS to Store or App distribution |
+| Run Tests     | [Run Tests](.github\workflows\run_tests.yml)       | Run tests and return coverage |
 
 ### Android
 
