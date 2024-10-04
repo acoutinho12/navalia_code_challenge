@@ -6,11 +6,18 @@ This is a Flutter application for a code challenge. The app supports multiple en
 
 - [Navalia Code Challenge App](#navalia-code-challenge-app)
   - [Table of Contents](#table-of-contents)
+  - [Demo](#demo)
   - [Getting Started](#getting-started)
   - [Flavors](#flavors)
   - [Building and Running](#building-and-running)
     - [Android](#android)
     - [iOS](#ios)
+  - [Cache Strategy for Flutter App using Dio, Hive, and ETAG](#cache-strategy-for-flutter-app-using-dio-hive-and-etag)
+  - [The strategy](#the-strategy)
+
+## Demo
+
+<video src="assets\project\videos\app_demo.mp4" controls></video>
 
 ## Getting Started
 
@@ -90,3 +97,14 @@ To build and run the app for a specific flavor on iOS, use the following command
   flutter build ios --flavor dev -t lib/main_dev.dart
   flutter run --flavor dev -t lib/main_dev.dart
   ```
+
+## Cache Strategy for Flutter App using Dio, Hive, and ETAG
+
+## The strategy
+
+In this project it was implemented an efficient caching strategy to improve performance and user experience . This project used a cache strategy using the `dio` package for HTTP requests, Hive for local storage, and ETAG headers for cache validation with:
+
+```yaml
+dio_cache_interceptor
+dio_cache_interceptor_hive_store
+```
