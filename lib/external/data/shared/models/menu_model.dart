@@ -1,106 +1,110 @@
+import 'package:navalia_code_challenge/core/constants/urls.dart';
 import 'package:navalia_code_challenge/core/utils/enum_utils.dart';
+import 'package:navalia_code_challenge/core/utils/formatters.dart';
 import 'package:navalia_code_challenge/external/domain/shared/entities/menu_entity.dart';
 
 final class MenuEntityModel extends MenuEntity {
   MenuEntityModel({
-    required super.serviceStatus,
-    required super.menuLists,
+    super.serviceStatus,
+    super.menuLists,
   });
 
   factory MenuEntityModel.fromJson(Map<String, dynamic> json) =>
       MenuEntityModel(
-        serviceStatus: json["serviceStatus"],
-        menuLists: MenuListsModel.fromJson(json["menuLists"]),
+        serviceStatus: Formatters.stringOrEmpty(json["serviceStatus"]),
+        menuLists: MenuListsModel.fromJson(json["menuLists"] ?? {}),
       );
 }
 
 final class MenuListsModel extends MenuLists {
   MenuListsModel({
-    required super.featuredItems,
-    required super.menuPromoItem,
-    required super.orderModes,
-    required super.menus,
-    required super.subMenus,
-    required super.menuItems,
-    required super.salesGroups,
-    required super.salesItems,
-    required super.modifierGroups,
-    required super.modifiers,
-    required super.modifierActions,
-    required super.styleCodes,
-    required super.disclaimers,
-    required super.comboConfig,
-    required super.cacheExpirationDate,
+    super.featuredItems,
+    super.menuPromoItem,
+    super.orderModes,
+    super.menus,
+    super.subMenus,
+    super.menuItems,
+    super.salesGroups,
+    super.salesItems,
+    super.modifierGroups,
+    super.modifiers,
+    super.modifierActions,
+    super.styleCodes,
+    super.disclaimers,
+    super.comboConfig,
+    super.cacheExpirationDate,
   });
 
   factory MenuListsModel.fromJson(Map<String, dynamic> json) => MenuListsModel(
         featuredItems: List<Item>.from(
-            json["featuredItems"].map((x) => ItemModel.fromJson(x))),
-        menuPromoItem: ItemModel.fromJson(json["menuPromoItem"]),
-        orderModes: List<dynamic>.from(json["orderModes"].map((x) => x)),
-        menus: List<Menu>.from(json["menus"].map((x) => MenuModel.fromJson(x))),
+            (json["featuredItems"] ?? []).map((x) => ItemModel.fromJson(x))),
+        menuPromoItem: ItemModel.fromJson(json["menuPromoItem"] ?? {}),
+        orderModes: [],
+        menus: List<Menu>.from(
+            (json["menus"] ?? []).map((x) => MenuModel.fromJson(x))),
         subMenus: List<SubMenu>.from(
-            json["subMenus"].map((x) => SubMenuModel.fromJson(x))),
+            (json["subMenus"] ?? []).map((x) => SubMenuModel.fromJson(x))),
         menuItems: List<MenuItem>.from(
-            json["menuItems"].map((x) => MenuItemModel.fromJson(x))),
-        salesGroups: List<SalesGroup>.from(
-            json["salesGroups"].map((x) => SalesGroupModel.fromJson(x))),
+            (json["menuItems"] ?? []).map((x) => MenuItemModel.fromJson(x))),
+        salesGroups: List<SalesGroup>.from((json["salesGroups"] ?? [])
+            .map((x) => SalesGroupModel.fromJson(x))),
         salesItems: List<SalesItem>.from(
-            json["salesItems"].map((x) => SalesItemModel.fromJson(x))),
-        modifierGroups: List<ModifierGroup>.from(
-            json["modifierGroups"].map((x) => ModifierGroupModel.fromJson(x))),
+            (json["salesItems"] ?? []).map((x) => SalesItemModel.fromJson(x))),
+        modifierGroups: List<ModifierGroup>.from((json["modifierGroups"] ?? [])
+            .map((x) => ModifierGroupModel.fromJson(x))),
         modifiers: List<Modifier>.from(
-            json["modifiers"].map((x) => ModifierModel.fromJson(x))),
-        modifierActions: List<ModifierAction>.from(json["modifierActions"]
-            .map((x) => ModifierActionModel.fromJson(x))),
-        styleCodes: List<StyleCodeElement>.from(
-            json["styleCodes"].map((x) => StyleCodeElementModel.fromJson(x))),
-        disclaimers: List<Disclaimer>.from(
-            json["disclaimers"].map((x) => DisclaimerModel.fromJson(x))),
-        comboConfig: List<ComboConfig>.from(
-            json["comboConfig"].map((x) => ComboConfigModel.fromJson(x))),
+            (json["modifiers"] ?? []).map((x) => ModifierModel.fromJson(x))),
+        modifierActions: List<ModifierAction>.from(
+            (json["modifierActions"] ?? [])
+                .map((x) => ModifierActionModel.fromJson(x))),
+        styleCodes: List<StyleCodeElement>.from((json["styleCodes"] ?? [])
+            .map((x) => StyleCodeElementModel.fromJson(x))),
+        disclaimers: List<Disclaimer>.from((json["disclaimers"] ?? [])
+            .map((x) => DisclaimerModel.fromJson(x))),
+        comboConfig: List<ComboConfig>.from((json["comboConfig"] ?? [])
+            .map((x) => ComboConfigModel.fromJson(x))),
         cacheExpirationDate: json["cacheExpirationDate"],
       );
 }
 
 final class ComboConfigModel extends ComboConfig {
   ComboConfigModel({
-    required super.salesGroupIds,
-    required super.comboSizes,
-    required super.comboConfigId,
+    super.salesGroupIds,
+    super.comboSizes,
+    super.comboConfigId,
   });
 
   factory ComboConfigModel.fromJson(Map<String, dynamic> json) =>
       ComboConfigModel(
-        salesGroupIds:
-            List<double>.from(json["salesGroupIds"].map((x) => x?.toDouble())),
+        salesGroupIds: List<double>.from(
+            (json["salesGroupIds"] ?? []).map((x) => x?.toDouble())),
         comboSizes: List<ComboSize>.from(
-            json["comboSizes"].map((x) => ComboSizeModel.fromJson(x))),
+            (json["comboSizes"] ?? []).map((x) => ComboSizeModel.fromJson(x))),
         comboConfigId: json["comboConfigId"],
       );
 }
 
 final class ComboSizeModel extends ComboSize {
   ComboSizeModel({
-    required super.comboGroups,
-    required super.size,
-    required super.baseImageName,
-    required super.sizeType,
+    super.comboGroups,
+    super.size,
+    super.baseImageName,
+    super.sizeType,
   });
 
   factory ComboSizeModel.fromJson(Map<String, dynamic> json) => ComboSizeModel(
-        comboGroups: List<ComboGroup>.from(
-            json["comboGroups"].map((x) => ComboGroupModel.fromJson(x))),
-        size: shortDescriptionValues.map[json["size"]]!,
+        comboGroups: List<ComboGroup>.from((json["comboGroups"] ?? [])
+            .map((x) => ComboGroupModel.fromJson(x))),
+        size: shortDescriptionValues.map[json["size"]],
         baseImageName: json["baseImageName"],
-        sizeType: shortDescriptionValues.map[json["sizeType"]]!,
+        sizeType: shortDescriptionValues.map[json["sizeType"]],
       );
 }
 
 final class ComboGroupModel extends ComboGroup {
   ComboGroupModel({
-    required super.salesItemId,
-    required super.salesGroupIndex,
+    super.salesItemId,
+    super.salesGroupIndex,
   });
 
   factory ComboGroupModel.fromJson(Map<String, dynamic> json) =>
@@ -131,8 +135,8 @@ final shortDescriptionValues = EnumValues({
 
 final class DisclaimerModel extends Disclaimer {
   DisclaimerModel({
-    required super.disclaimerCode,
-    required super.disclaimerText,
+    super.disclaimerCode,
+    super.disclaimerText,
   });
 
   factory DisclaimerModel.fromJson(Map<String, dynamic> json) =>
@@ -144,10 +148,10 @@ final class DisclaimerModel extends Disclaimer {
 
 final class ItemModel extends Item {
   ItemModel({
-    required super.productId,
-    required super.url,
-    required super.type,
-    required super.image,
+    super.productId,
+    super.url,
+    super.type,
+    super.image,
   });
 
   factory ItemModel.fromJson(Map<String, dynamic> json) => ItemModel(
@@ -160,37 +164,42 @@ final class ItemModel extends Item {
 
 final class MenuItemModel extends MenuItem {
   MenuItemModel({
-    required super.name,
-    required super.description,
-    required super.displayName,
-    required super.baseImageName,
-    required super.menuItemId,
-    required super.defaultItemId,
-    required super.salesItemIds,
-    required super.promoId,
-    required super.price,
-    required super.productGroupId,
-    required super.comboMenuItemId,
-    required super.titleTag,
-    required super.metaDescription,
-    required super.calorieRange,
-    required super.priceRange,
-    required super.selectionMode,
-    required super.attributes,
-    required super.selectionLabel,
-    required super.salesGroups,
-    required super.comboConfigId,
-    required super.comboLabel,
+    super.name,
+    super.description,
+    super.displayName,
+    super.imageUrl,
+    super.baseImageName,
+    super.menuItemId,
+    super.defaultItemId,
+    super.salesItemIds,
+    super.promoId,
+    super.price,
+    super.productGroupId,
+    super.comboMenuItemId,
+    super.titleTag,
+    super.metaDescription,
+    super.calorieRange,
+    super.priceRange,
+    super.selectionMode,
+    super.attributes,
+    super.selectionLabel,
+    super.salesGroups,
+    super.comboConfigId,
+    super.comboLabel,
   });
 
   factory MenuItemModel.fromJson(Map<String, dynamic> json) => MenuItemModel(
-        name: json["name"],
-        description: json["description"],
-        displayName: json["displayName"],
-        baseImageName: json["baseImageName"],
-        menuItemId: json["menuItemId"],
-        defaultItemId: json["defaultItemId"],
-        salesItemIds: List<int>.from(json["salesItemIds"].map((x) => x)),
+        name: Formatters.stringOrEmpty(json["name"]),
+        description: Formatters.stringOrEmpty(json["description"]),
+        displayName: Formatters.stringOrEmpty(json["displayName"]),
+        imageUrl: json["baseImageName"] != null
+            ? "${Urls.imageBaseUrl}unified/assets/menu/pg-cropped/${json["baseImageName"]}_small_US_en.png"
+            : null,
+        baseImageName: Formatters.stringOrEmpty(json["baseImageName"]),
+        menuItemId: Formatters.intOrNegativeOne(json["menuItemId"]),
+        defaultItemId: Formatters.intOrNegativeOne(json["defaultItemId"]),
+        salesItemIds:
+            List<int>.from((json["salesItemIds"] ?? []).map((x) => x)),
         promoId: json["promoId"],
         price: json["price"]?.toDouble(),
         productGroupId: json["productGroupId"],
@@ -199,24 +208,24 @@ final class MenuItemModel extends MenuItem {
         metaDescription: json["metaDescription"],
         calorieRange: json["calorieRange"],
         priceRange: json["priceRange"],
-        selectionMode: selectionModeValues.map[json["selectionMode"]]!,
-        attributes: AttributesModel.fromJson(json["attributes"]),
-        selectionLabel: labelValues.map[json["selectionLabel"]]!,
-        salesGroups: List<SalesGroup>.from(
-            json["salesGroups"].map((x) => SalesGroupModel.fromJson(x))),
+        selectionMode: selectionModeValues.map[json["selectionMode"]],
+        attributes: AttributesModel.fromJson(json["attributes"] ?? {}),
+        selectionLabel: labelValues.map[json["selectionLabel"]],
+        salesGroups: List<SalesGroup>.from((json["salesGroups"] ?? [])
+            .map((x) => SalesGroupModel.fromJson(x))),
         comboConfigId: json["comboConfigId"],
-        comboLabel: labelValues.map[json["comboLabel"]]!,
+        comboLabel: labelValues.map[json["comboLabel"]],
       );
 }
 
 final class AttributesModel extends Attributes {
   AttributesModel({
-    required super.selectionLabel,
+    super.selectionLabel,
   });
 
   factory AttributesModel.fromJson(Map<String, dynamic> json) =>
       AttributesModel(
-        selectionLabel: selectionLabelValues.map[json["selectionLabel"]]!,
+        selectionLabel: selectionLabelValues.map[json["selectionLabel"]],
       );
 }
 
@@ -229,18 +238,18 @@ final labelValues = EnumValues({"MEAL": Label.meal, "STYLE": Label.style});
 
 final class SalesGroupModel extends SalesGroup {
   SalesGroupModel({
-    required super.name,
-    required super.description,
-    required super.displayName,
-    required super.salesGroupId,
-    required super.defaultSalesItemId,
-    required super.salesItemIds,
-    required super.minimumItems,
-    required super.maximumItems,
-    required super.salesGroupIds,
-    required super.salesItemDetails,
-    required super.calorieRange,
-    required super.baseImageName,
+    super.name,
+    super.description,
+    super.displayName,
+    super.salesGroupId,
+    super.defaultSalesItemId,
+    super.salesItemIds,
+    super.minimumItems,
+    super.maximumItems,
+    super.salesGroupIds,
+    super.salesItemDetails,
+    super.calorieRange,
+    super.baseImageName,
   });
 
   factory SalesGroupModel.fromJson(Map<String, dynamic> json) =>
@@ -250,12 +259,15 @@ final class SalesGroupModel extends SalesGroup {
         displayName: json["displayName"],
         salesGroupId: json["salesGroupId"]?.toDouble(),
         defaultSalesItemId: json["defaultSalesItemId"],
-        salesItemIds: List<int>.from(json["salesItemIds"].map((x) => x)),
+        salesItemIds:
+            List<int>.from((json["salesItemIds"] ?? []).map((x) => x)),
         minimumItems: json["minimumItems"],
         maximumItems: json["maximumItems"],
-        salesGroupIds: List<int>.from(json["salesGroupIds"].map((x) => x)),
-        salesItemDetails: List<SalesItemDetail>.from(json["salesItemDetails"]
-            .map((x) => SalesItemDetailModel.fromJson(x))),
+        salesGroupIds:
+            List<int>.from((json["salesGroupIds"] ?? []).map((x) => x)),
+        salesItemDetails: List<SalesItemDetail>.from(
+            (json["salesItemDetails"] ?? [])
+                .map((x) => SalesItemDetailModel.fromJson(x))),
         calorieRange: json["calorieRange"],
         baseImageName: json["baseImageName"],
       );
@@ -263,8 +275,8 @@ final class SalesGroupModel extends SalesGroup {
 
 final class SalesItemDetailModel extends SalesItemDetail {
   SalesItemDetailModel({
-    required super.salesItemId,
-    required super.priceIncrement,
+    super.salesItemId,
+    super.priceIncrement,
   });
 
   factory SalesItemDetailModel.fromJson(Map<String, dynamic> json) =>
@@ -282,36 +294,37 @@ final selectionModeValues = EnumValues({
 
 final class MenuModel extends Menu {
   MenuModel({
-    required super.name,
-    required super.displayName,
-    required super.menuId,
-    required super.subMenus,
-    required super.productGroupId,
-    required super.breakfastSubMenuIds,
-    required super.lunchSubMenuIds,
-    required super.disclaimerCodes,
+    super.name,
+    super.displayName,
+    super.menuId,
+    super.subMenus,
+    super.productGroupId,
+    super.breakfastSubMenuIds,
+    super.lunchSubMenuIds,
+    super.disclaimerCodes,
   });
 
   factory MenuModel.fromJson(Map<String, dynamic> json) => MenuModel(
-        name: json["name"],
-        displayName: json["displayName"],
-        menuId: json["menuId"],
-        subMenus: List<int>.from(json["subMenus"].map((x) => x)),
-        productGroupId: json["productGroupId"],
+        name: Formatters.stringOrEmpty(json["name"]),
+        displayName: Formatters.stringOrEmpty(json["displayName"]),
+        menuId: Formatters.intOrNegativeOne(json["menuId"]),
+        subMenus: List<int>.from((json["subMenus"] ?? []).map((x) => x)),
+        productGroupId: Formatters.stringOrEmpty(json["productGroupId"]),
         breakfastSubMenuIds:
-            List<int>.from(json["breakfastSubMenuIds"].map((x) => x)),
-        lunchSubMenuIds: List<int>.from(json["lunchSubMenuIds"].map((x) => x)),
+            List<int>.from((json["breakfastSubMenuIds"] ?? []).map((x) => x)),
+        lunchSubMenuIds:
+            List<int>.from((json["lunchSubMenuIds"] ?? []).map((x) => x)),
         disclaimerCodes:
-            List<String>.from(json["disclaimerCodes"].map((x) => x)),
+            List<String>.from((json["disclaimerCodes"] ?? []).map((x) => x)),
       );
 }
 
 final class ModifierActionModel extends ModifierAction {
   ModifierActionModel({
-    required super.name,
-    required super.displayName,
-    required super.action,
-    required super.shortName,
+    super.name,
+    super.displayName,
+    super.action,
+    super.shortName,
   });
 
   factory ModifierActionModel.fromJson(Map<String, dynamic> json) =>
@@ -325,25 +338,25 @@ final class ModifierActionModel extends ModifierAction {
 
 final class ModifierGroupModel extends ModifierGroup {
   ModifierGroupModel({
-    required super.name,
-    required super.description,
-    required super.displayName,
-    required super.baseImageName,
-    required super.modifierGroupId,
-    required super.minimumItems,
-    required super.maximumItems,
-    required super.perOptionMinimum,
-    required super.perOptionMaximum,
-    required super.sourceModifierGroupId,
-    required super.modifiers,
-    required super.freeModifiers,
-    required super.isPlain,
-    required super.isBun,
-    required super.isBase,
-    required super.isMeat,
-    required super.displayCode,
-    required super.attributes,
-    required super.componentGroupId,
+    super.name,
+    super.description,
+    super.displayName,
+    super.baseImageName,
+    super.modifierGroupId,
+    super.minimumItems,
+    super.maximumItems,
+    super.perOptionMinimum,
+    super.perOptionMaximum,
+    super.sourceModifierGroupId,
+    super.modifiers,
+    super.freeModifiers,
+    super.isPlain,
+    super.isBun,
+    super.isBase,
+    super.isMeat,
+    super.displayCode,
+    super.attributes,
+    super.componentGroupId,
   });
 
   factory ModifierGroupModel.fromJson(Map<String, dynamic> json) =>
@@ -358,14 +371,14 @@ final class ModifierGroupModel extends ModifierGroup {
         perOptionMinimum: json["perOptionMinimum"],
         perOptionMaximum: json["perOptionMaximum"],
         sourceModifierGroupId: json["sourceModifierGroupId"],
-        modifiers: List<int>.from(json["modifiers"].map((x) => x)),
+        modifiers: List<int>.from((json["modifiers"] ?? []).map((x) => x)),
         freeModifiers: json["freeModifiers"],
         isPlain: json["isPlain"],
         isBun: json["isBun"],
         isBase: json["isBase"],
         isMeat: json["isMeat"],
-        displayCode: displayCodeValues.map[json["displayCode"]]!,
-        attributes: AttributesModel.fromJson(json["attributes"]),
+        displayCode: displayCodeValues.map[json["displayCode"]],
+        attributes: AttributesModel.fromJson(json["attributes"] ?? {}),
         componentGroupId: json["componentGroupId"],
       );
 }
@@ -377,17 +390,17 @@ final displayCodeValues = EnumValues({
 
 final class ModifierModel extends Modifier {
   ModifierModel({
-    required super.name,
-    required super.description,
-    required super.displayName,
-    required super.modifierId,
-    required super.itemModifiers,
-    required super.componentId,
-    required super.styleCode,
-    required super.isSplittable,
-    required super.masterSequence,
-    required super.weight,
-    required super.posItemId,
+    super.name,
+    super.description,
+    super.displayName,
+    super.modifierId,
+    super.itemModifiers,
+    super.componentId,
+    super.styleCode,
+    super.isSplittable,
+    super.masterSequence,
+    super.weight,
+    super.posItemId,
   });
 
   factory ModifierModel.fromJson(Map<String, dynamic> json) => ModifierModel(
@@ -395,10 +408,10 @@ final class ModifierModel extends Modifier {
         description: json["description"],
         displayName: json["displayName"],
         modifierId: json["modifierId"],
-        itemModifiers: List<ItemModifier>.from(
-            json["itemModifiers"].map((x) => ItemModifierModel.fromJson(x))),
+        itemModifiers: List<ItemModifier>.from((json["itemModifiers"] ?? [])
+            .map((x) => ItemModifierModel.fromJson(x))),
         componentId: json["componentId"],
-        styleCode: styleCodeEnumValues.map[json["styleCode"]]!,
+        styleCode: styleCodeEnumValues.map[json["styleCode"]],
         isSplittable: json["isSplittable"],
         masterSequence: json["masterSequence"],
         weight: json["weight"]?.toDouble(),
@@ -408,10 +421,10 @@ final class ModifierModel extends Modifier {
 
 final class ItemModifierModel extends ItemModifier {
   ItemModifierModel({
-    required super.salesItemModifierId,
-    required super.modifierGroupId,
-    required super.price,
-    required super.modifierAction,
+    super.salesItemModifierId,
+    super.modifierGroupId,
+    super.price,
+    super.modifierAction,
   });
 
   factory ItemModifierModel.fromJson(Map<String, dynamic> json) =>
@@ -432,25 +445,25 @@ final styleCodeEnumValues = EnumValues({
 
 final class SalesItemModel extends SalesItem {
   SalesItemModel({
-    required super.name,
-    required super.description,
-    required super.displayName,
-    required super.salesItemId,
-    required super.categoryName,
-    required super.price,
-    required super.modifierGroups,
-    required super.defaultOptions,
-    required super.shortDescription,
-    required super.isLto,
-    required super.productId,
-    required super.nutrition,
-    required super.alaCarteMenuItemId,
-    required super.calorieRange,
-    required super.isFreestyle,
-    required super.posItemId,
-    required super.promoId,
-    required super.nwsgProductGroupId,
-    required super.originalPosItemId,
+    super.name,
+    super.description,
+    super.displayName,
+    super.salesItemId,
+    super.categoryName,
+    super.price,
+    super.modifierGroups,
+    super.defaultOptions,
+    super.shortDescription,
+    super.isLto,
+    super.productId,
+    super.nutrition,
+    super.alaCarteMenuItemId,
+    super.calorieRange,
+    super.isFreestyle,
+    super.posItemId,
+    super.promoId,
+    super.nwsgProductGroupId,
+    super.originalPosItemId,
   });
 
   factory SalesItemModel.fromJson(Map<String, dynamic> json) => SalesItemModel(
@@ -460,13 +473,14 @@ final class SalesItemModel extends SalesItem {
         salesItemId: json["salesItemId"],
         categoryName: json["categoryName"],
         price: json["price"]?.toDouble(),
-        modifierGroups: List<int>.from(json["modifierGroups"].map((x) => x)),
-        defaultOptions: List<DefaultOption>.from(
-            json["defaultOptions"].map((x) => DefaultOptionModel.fromJson(x))),
-        shortDescription: shortDescriptionValues.map[json["shortDescription"]]!,
+        modifierGroups:
+            List<int>.from((json["modifierGroups"] ?? []).map((x) => x)),
+        defaultOptions: List<DefaultOption>.from((json["defaultOptions"] ?? [])
+            .map((x) => DefaultOptionModel.fromJson(x))),
+        shortDescription: shortDescriptionValues.map[json["shortDescription"]],
         isLto: json["isLTO"],
         productId: json["productId"],
-        nutrition: NutritionModel.fromJson(json["nutrition"]),
+        nutrition: NutritionModel.fromJson(json["nutrition"] ?? {}),
         alaCarteMenuItemId: json["alaCarteMenuItemId"],
         calorieRange: json["calorieRange"],
         isFreestyle: json["isFreestyle"],
@@ -479,11 +493,11 @@ final class SalesItemModel extends SalesItem {
 
 final class DefaultOptionModel extends DefaultOption {
   DefaultOptionModel({
-    required super.modifierGroupId,
-    required super.modifierId,
-    required super.defaultQuantity,
-    required super.defaultReason,
-    required super.modifierAction,
+    super.modifierGroupId,
+    super.modifierId,
+    super.defaultQuantity,
+    super.defaultReason,
+    super.modifierAction,
   });
 
   factory DefaultOptionModel.fromJson(Map<String, dynamic> json) =>
@@ -498,43 +512,43 @@ final class DefaultOptionModel extends DefaultOption {
 
 final class NutritionModel extends Nutrition {
   NutritionModel({
-    required super.calorieRange,
-    required super.servingSize,
-    required super.calories,
-    required super.caloriesFromFat,
-    required super.totalFat,
-    required super.saturated,
-    required super.transFattyAcids,
-    required super.cholesterol,
-    required super.sodium,
-    required super.carbohydrates,
-    required super.dietaryFiber,
-    required super.sugars,
-    required super.protein,
-    required super.vitaminA,
-    required super.vitaminC,
-    required super.vitaminD,
-    required super.calcium,
-    required super.iron,
-    required super.monounsaturated,
-    required super.polyunsaturated,
-    required super.potassium,
-    required super.hasEgg,
-    required super.hasFish,
-    required super.hasMilk,
-    required super.hasSoy,
-    required super.hasTreenut,
-    required super.hasPeanut,
-    required super.hasWheat,
-    required super.hasShellfish,
-    required super.hasSesame,
+    super.calorieRange,
+    super.servingSize,
+    super.calories,
+    super.caloriesFromFat,
+    super.totalFat,
+    super.saturated,
+    super.transFattyAcids,
+    super.cholesterol,
+    super.sodium,
+    super.carbohydrates,
+    super.dietaryFiber,
+    super.sugars,
+    super.protein,
+    super.vitaminA,
+    super.vitaminC,
+    super.vitaminD,
+    super.calcium,
+    super.iron,
+    super.monounsaturated,
+    super.polyunsaturated,
+    super.potassium,
+    super.hasEgg,
+    super.hasFish,
+    super.hasMilk,
+    super.hasSoy,
+    super.hasTreenut,
+    super.hasPeanut,
+    super.hasWheat,
+    super.hasShellfish,
+    super.hasSesame,
   });
 
   factory NutritionModel.fromJson(Map<String, dynamic> json) => NutritionModel(
         calorieRange: json["calorieRange"],
-        servingSize: json["servingSize"],
-        calories: json["calories"],
-        caloriesFromFat: json["caloriesFromFat"],
+        servingSize: Formatters.intOrNegativeOne(json["servingSize"]),
+        calories: Formatters.intOrNegativeOne(json["calories"]),
+        caloriesFromFat: Formatters.intOrNegativeOne(json["caloriesFromFat"]),
         totalFat: json["totalFat"]?.toDouble(),
         saturated: json["saturated"]?.toDouble(),
         transFattyAcids: json["transFattyAcids"]?.toDouble(),
@@ -544,14 +558,14 @@ final class NutritionModel extends Nutrition {
         dietaryFiber: json["dietaryFiber"]?.toDouble(),
         sugars: json["sugars"]?.toDouble(),
         protein: json["protein"]?.toDouble(),
-        vitaminA: json["vitaminA"],
-        vitaminC: json["vitaminC"],
-        vitaminD: json["vitaminD"],
-        calcium: json["calcium"],
-        iron: json["iron"],
+        vitaminA: json["vitaminA"]?.toInt(),
+        vitaminC: json["vitaminC"]?.toInt(),
+        vitaminD: json["vitaminD"]?.toInt(),
+        calcium: json["calcium"]?.toInt(),
+        iron: json["iron"]?.toInt(),
         monounsaturated: json["monounsaturated"]?.toDouble(),
         polyunsaturated: json["polyunsaturated"]?.toDouble(),
-        potassium: json["potassium"],
+        potassium: json["potassium"]?.toInt(),
         hasEgg: json["hasEgg"],
         hasFish: json["hasFish"],
         hasMilk: json["hasMilk"],
@@ -566,42 +580,46 @@ final class NutritionModel extends Nutrition {
 
 final class StyleCodeElementModel extends StyleCodeElement {
   StyleCodeElementModel({
-    required super.styleCode,
-    required super.modifierActionIds,
+    super.styleCode,
+    super.modifierActionIds,
   });
 
   factory StyleCodeElementModel.fromJson(Map<String, dynamic> json) =>
       StyleCodeElementModel(
-        styleCode: styleCodeEnumValues.map[json["styleCode"]]!,
+        styleCode: styleCodeEnumValues.map[json["styleCode"]],
         modifierActionIds:
-            List<int>.from(json["modifierActionIds"].map((x) => x)),
+            List<int>.from((json["modifierActionIds"] ?? []).map((x) => x)),
       );
 }
 
 final class SubMenuModel extends SubMenu {
   SubMenuModel({
-    required super.name,
-    required super.description,
-    required super.displayName,
-    required super.baseImageName,
-    required super.subMenuId,
-    required super.menuItems,
-    required super.productGroupId,
-    required super.titleTag,
-    required super.metaDescription,
-    required super.disclaimerCode,
+    super.name,
+    super.description,
+    super.displayName,
+    super.imageUrl,
+    super.baseImageName,
+    super.subMenuId,
+    super.menuItems,
+    super.productGroupId,
+    super.titleTag,
+    super.metaDescription,
+    super.disclaimerCode,
   });
 
   factory SubMenuModel.fromJson(Map<String, dynamic> json) => SubMenuModel(
         name: json["name"],
         description: json["description"],
         displayName: json["displayName"],
+        imageUrl: json["baseImageName"] != null
+            ? "${Urls.imageBaseUrl}/unified/assets/menu/productGroups/${json["baseImageName"]}_medium_US_en.png"
+            : null,
         baseImageName: json["baseImageName"],
         subMenuId: json["subMenuId"],
-        menuItems: List<int>.from(json["menuItems"].map((x) => x)),
-        productGroupId: json["productGroupId"],
-        titleTag: json["titleTag"],
-        metaDescription: json["metaDescription"],
-        disclaimerCode: json["disclaimerCode"],
+        menuItems: List<int>.from((json["menuItems"] ?? []).map((x) => x)),
+        productGroupId: Formatters.stringOrEmpty(json["productGroupId"]),
+        titleTag: Formatters.stringOrEmpty(json["titleTag"]),
+        metaDescription: Formatters.stringOrEmpty(json["metaDescription"]),
+        disclaimerCode: Formatters.stringOrEmpty(json["disclaimerCode"]),
       );
 }

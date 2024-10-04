@@ -3,7 +3,20 @@ import 'package:navalia_code_challenge/core/constants/endpoints.dart';
 import 'package:navalia_code_challenge/core/exceptions/exceptions.dart';
 import 'package:navalia_code_challenge/core/extensions/extensions.dart';
 
-mixin HandleRequestsMixins {
+mixin HandleRequestsMixin {
+  Future<T> handleResponse<T, R>(
+      Endpoint endpoint, T Function(dynamic) returnType) async {
+    try {
+      final response = await makeRequest(endpoint);
+      return returnType.call(response.data);
+    } on DioException catch (e) {
+      handleError(e);
+    } catch (e) {
+      throw DefaultException(e.toString());
+    }
+    throw UnknownException(ErrorDefaultMessages.unknownExceptionMessage);
+  }
+
   Future<Response<T>> makeRequest<T>(Endpoint endpoint) async {
     final Dio? dio = endpoint.dio;
     final Map<String, dynamic>? queryParams = endpoint.queryParams;

@@ -6,11 +6,19 @@ This is a Flutter application for a code challenge. The app supports multiple en
 
 - [Navalia Code Challenge App](#navalia-code-challenge-app)
   - [Table of Contents](#table-of-contents)
+  - [Demo](#demo)
   - [Getting Started](#getting-started)
   - [Flavors](#flavors)
   - [Building and Running](#building-and-running)
+    - [CI](#ci)
     - [Android](#android)
     - [iOS](#ios)
+  - [Cache Strategy for Flutter App using Dio, Hive, and ETAG](#cache-strategy-for-flutter-app-using-dio-hive-and-etag)
+  - [The strategy](#the-strategy)
+
+## Demo
+
+<https://github.com/user-attachments/assets/03ccb7ba-bb17-40b5-a603-2b21e458fbad>
 
 ## Getting Started
 
@@ -40,6 +48,14 @@ This app supports three flavors:
 Each flavor has its own configuration and entry point.
 
 ## Building and Running
+
+### CI
+
+| Workflow      | File                                                                 | Description |
+| ------------- | ---------------------------------------------------------------------- | ---- |
+| Build Android | [Build Android](.github\workflows\build_android.yml) | Build and deploy Android to Store or App distribution |
+| Build iOS     | [Build iOS](.github\workflows\build_ios.yml)       | Build and deploy iOS to Store or App distribution |
+| Run Tests     | [Run Tests](.github\workflows\run_tests.yml)       | Run tests and return coverage |
 
 ### Android
 
@@ -90,3 +106,14 @@ To build and run the app for a specific flavor on iOS, use the following command
   flutter build ios --flavor dev -t lib/main_dev.dart
   flutter run --flavor dev -t lib/main_dev.dart
   ```
+
+## Cache Strategy for Flutter App using Dio, Hive, and ETAG
+
+## The strategy
+
+In this project it was implemented an efficient caching strategy to improve performance and user experience . This project used a cache strategy using the `dio` package for HTTP requests, Hive for local storage, and ETAG headers for cache validation with:
+
+```yaml
+dio_cache_interceptor
+dio_cache_interceptor_hive_store
+```
